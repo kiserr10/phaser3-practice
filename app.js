@@ -66,6 +66,7 @@ function create(){
 
     this.physics.add.collider(player, platforms); //collide detection between the two Game Objects passed in!
     this.physics.add.collider(stars, platforms);
+    this.physics.add.overlap(player, stars, collectStar, null, this);
     
     this.anims.create({
         key: 'left',
@@ -93,14 +94,18 @@ function update(){
         player.anims.play('left', true);
     } else if(cursors.right.isDown){
         player.setVelocityX(160);
-        player.anims.play('right', true);
+        player.anims.play('right', true); 
     } else {
         player.setVelocityX(0);
         player.anims.play('turn');
     }
-    if(cursors.up.isDown && player.body.touching.down){ 
+    if(cursors.space.isDown && player.body.touching.down){ 
         //checks to see if the player is touching the ground/floor 
         //player shouldnt be able to jump from mid air
-        player.setVelocityY(-330);
+        player.setVelocityY(-500);
     }
+}
+
+function collectStar(player, star){
+    star.disableBody(true, true);
 }
