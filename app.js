@@ -19,6 +19,7 @@ const config = {
 const game = new Phaser.Game(config);
 
 let platforms;
+let stars;
 let player;
 let cursors;
 
@@ -34,10 +35,17 @@ function preload(){
 }
 
 function create(){
-    cursors = this.input.keyboard.createCursorKeys();
     this.add.image(400, 300, 'sky');
-
+    cursors = this.input.keyboard.createCursorKeys();
     platforms = this.physics.add.staticGroup(); 
+    stars = this.physics.add.group({
+        key: 'star',
+        repeat: 11,
+        setXY: { x: 12, y: 0, stepX: 70 }
+    });
+    stars.children.iterate((child) => {
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
     //call to Arcade Physics System...must add to game config
     //applies a STATIC physics group to the variable platforms...these are STATIC bodies VS DYNAMIC
     //A Physics Group will automatically create physics enabled children, saving you some leg-work in the process.
@@ -57,6 +65,7 @@ function create(){
     player.body.setGravityY(300);
 
     this.physics.add.collider(player, platforms); //collide detection between the two Game Objects passed in!
+    this.physics.add.collider(stars, platforms);
     
     this.anims.create({
         key: 'left',
