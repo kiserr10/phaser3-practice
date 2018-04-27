@@ -32,7 +32,10 @@ function preload(){
 function create(){
     this.add.image(400, 300, 'sky');
 
-    platforms = this.physics.add.staticGroup(); //call to Arcade Physics System...must add to game config
+    platforms = this.physics.add.staticGroup(); 
+    //call to Arcade Physics System...must add to game config
+    //applies a STATIC physics group to the variable platforms...these are STATIC bodies VS DYNAMIC
+    //A Physics Group will automatically create physics enabled children, saving you some leg-work in the process.
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
     platforms.create(600, 400, 'ground');
     platforms.create(50, 250, 'ground');
