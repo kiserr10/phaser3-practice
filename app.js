@@ -49,10 +49,6 @@ function create(){
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
     });
 
-    bombs = this.physics.add.group();
-    this.physics.add.collider(bombs, platforms);
-    this.physics.add.collider(player, bombs, hitBomb, null, this);
-
     scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
     //call to Arcade Physics System...must add to game config
     //applies a STATIC physics group to the variable platforms...these are STATIC bodies VS DYNAMIC
@@ -94,6 +90,9 @@ function create(){
         frameRate: 10,
         repeat: -1
     });
+    bombs = this.physics.add.group();
+    this.physics.add.collider(bombs, platforms);
+    this.physics.add.collider(player, bombs, hitBomb, null, this);
 }
 
 function update(){
