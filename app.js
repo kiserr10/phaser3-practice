@@ -12,7 +12,7 @@ const config = {
     scene: {
         preload: preload,
         create: create,
-        update, update
+        update: update
     }
 };
 
